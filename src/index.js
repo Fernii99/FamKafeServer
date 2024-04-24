@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const dbConnection = process.env.DATABASE_CONNECTION;
 
 const productRouter = require("./routes/productRoutes")
+const userRouter = require("./routes/userRoutes")
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,6 +14,21 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json());
 
 app.use("/products", productRouter)
+app.use("/users", userRouter)
+
+// **********************************
+//  FIREBASE PROJECT CONFIGURATION
+// **********************************
+const admin = require("firebase-admin");
+
+admin.initializeApp({
+    credential: admin.credential.cert({
+        "project_id": process.env.FIREBASE_PROJECT_ID,
+        "private_key": process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+        "client_email": process.env.FIREBASE_CLIENT_EMAIL
+    }),
+})
+
 
 async function start(){
     try{
