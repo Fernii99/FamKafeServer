@@ -1,7 +1,10 @@
 const UserService = require("../services/userServices");
 const admin = require('firebase-admin')
 
-const addNewUser = async (req, res) => {
+const LoginUser = async (req, res) => {
+
+    console.log("LOGIN PETITION COMING FROM CLIENT ")
+
     const userData = req.body
 
     //SAVE THE IDTOKEN INTO A CONSTANT
@@ -10,10 +13,12 @@ const addNewUser = async (req, res) => {
     //MAKE THE VERIFICATION OF THE TOKEN WITH FIREBASE-ADMIN - AUTH() -
     const verificationUser = await admin.auth().verifyIdToken(idToken)
 
+    console.log("veirificationUser received in usercontroller")
+    console.log(verificationUser)
     
 
     try{
-        const createdUser = await UserService.addNewUser(verificationUser);
+        const createdUser = await UserService.LoginUser(verificationUser);
         res.status(201).send({status: "OK", data: createdUser});
     }
     catch ( error){
@@ -26,5 +31,5 @@ const addNewUser = async (req, res) => {
 };
 
 module.exports = { 
-    addNewUser
+    LoginUser,
 }

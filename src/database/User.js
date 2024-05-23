@@ -1,5 +1,17 @@
 const User = require('../models/userModel')
 
+
+const findUserByEmail = async (email) => {
+   
+    try{
+       
+        const UserFound = await User.find({"email": email.toString()});
+        return UserFound;
+    }catch (error){
+        throw error;
+    }
+}
+
 //INSERT ONE NEW USER ON THE DATABASE
 const addNewUser = async (newUser) => {
     try{
@@ -12,6 +24,7 @@ const addNewUser = async (newUser) => {
 }
 
 
-module.exports = { 
+module.exports = {
+    findUserByEmail,
     addNewUser
 }

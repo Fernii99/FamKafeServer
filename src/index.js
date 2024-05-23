@@ -7,6 +7,7 @@ const dbConnection = process.env.DATABASE_CONNECTION;
 
 const productRouter = require("./routes/productRoutes")
 const userRouter = require("./routes/userRoutes")
+const orderRouter = require("./routes/orderRoutes")
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,6 +16,9 @@ app.use(bodyParser.json());
 
 app.use("/products", productRouter)
 app.use("/users", userRouter)
+app.use("/orders", orderRouter)
+
+
 
 // **********************************
 //  FIREBASE PROJECT CONFIGURATION

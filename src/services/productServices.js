@@ -19,7 +19,6 @@ const addNewProduct = async (newProduct) => {
 };
 
 const findByValue = async (filter) => {
-    
     try{
         const productsFiltered = Product.findByValue(filter);
         return productsFiltered;
