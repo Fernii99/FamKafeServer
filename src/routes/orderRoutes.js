@@ -11,10 +11,13 @@ router.post("/new",  orderController.addNewOrder);
 router.get("/all",  orderController.getAllOrders);
 
 //PENDING ORDERS TO DISPLAY ON THE  ADMIN SCREEN
-router.get("/pending",  orderController.addNewOrder);
+router.get("/pending",  orderController.getPendingOrders);
 
 //THE APP USING PROFILES ORDERS 
 router.get("/:userId",  orderController.getUserOrders);
+
+//Update one order
+router.patch("/:orderId",  orderController.updateOrder);
 
 
 

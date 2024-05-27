@@ -10,6 +10,10 @@ const LoginUser = async (req, res) => {
     //SAVE THE IDTOKEN INTO A CONSTANT
     const idToken = userData.idToken;
 
+    console.log("ID TOKEN CONTROLLER");
+    console.log(idToken);
+
+
     //MAKE THE VERIFICATION OF THE TOKEN WITH FIREBASE-ADMIN - AUTH() -
     const verificationUser = await admin.auth().verifyIdToken(idToken)
 

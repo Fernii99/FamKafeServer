@@ -34,6 +34,20 @@ const getAllOrders = async (req, res) => {
     }
 };
 
+const getPendingOrders = async (req, res) => {
+    try{
+        const foundOrders = await orderSevice.getPendingOrders();
+        res.status(201).send({status: "OK", data: foundOrders});
+    }
+    catch ( error){
+        res
+        .status(error?.status || 500 )
+        .send({ status: "FAILED",
+                message: "Error al realizar la peticion:",
+                data: {error: error?.message || error }});
+    }
+};
+
 const getUserOrders = async (req, res) => {
 
     const {params:{userId}} = req;
@@ -53,8 +67,28 @@ const getUserOrders = async (req, res) => {
     }
 };
 
+const updateOrder = async (req, res) => {
+
+    const {params:{orderId}} = req;
+    console.log(orderId);
+
+    try{
+        const updatedOrder = await orderSevice.updateOrder(orderId);
+        res.status(201).send({status: "OK", data: updatedOrder});
+    }
+    catch ( error){
+        res
+        .status(error?.status || 500 )
+        .send({ status: "FAILED",
+                message: "Error al realizar la peticion:",
+                data: {error: error?.message || error }});
+    }
+};
+
 module.exports = { 
     addNewOrder,
     getAllOrders,
-    getUserOrders
+    getUserOrders,
+    getPendingOrders,
+    updateOrder
 }

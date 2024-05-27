@@ -23,6 +23,16 @@ const getAllOrders = async () => {
     }
 };
 
+const getPendingOrders = async () => {
+    
+    try{
+        const ordersFound = Order.getPendingOrders();
+        return ordersFound;
+    }catch (error){
+        throw error;
+    }
+};
+
 const getUserOrders = async (userId) => {
     
     try{
@@ -33,10 +43,20 @@ const getUserOrders = async (userId) => {
     }
 };
 
+const updateOrder = async (orderId) => {
+    try{
+        const updatedOrder = Order.updateOrder(orderId);
+        return updatedOrder;
+    }catch (error){
+        throw error;
+    }
+};
 
 
 module.exports = { 
    addNewOrder,
    getAllOrders,
-   getUserOrders
+   getUserOrders,
+   getPendingOrders,
+   updateOrder
 }
