@@ -23,7 +23,7 @@ const getAllOrders = async () => {
 
 const getUserOrders = async (userId) => {
     try{
-        const foundOrders = await Order.find({ "profileid": userId}, "products profileid price status", );
+        const foundOrders = await Order.find({ "profileid": userId}, "products profileid price status orderDate", );
         console.log(foundOrders)
         return foundOrders;
     }catch (error){
